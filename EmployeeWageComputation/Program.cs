@@ -1,11 +1,14 @@
-﻿// See https://aka.ms/new-console-template for more information
-using System;
+﻿using System;
 
 namespace EmployeeWageComputation
 {
     class Program
     {
         static void Main(string[] args)
+        {
+            Console.WriteLine("Total Wage is: " + CalculateEmpWage());
+        }
+        public static int CalculateEmpWage()
         {
             int empHrs = 0;
             int empWage = 0;
@@ -20,7 +23,6 @@ namespace EmployeeWageComputation
 
             //welcome message
             Console.WriteLine("Welcome to Employee Wage Computation Problem");
-            //UC1-EmployeeAttendance
             Random random = new Random();
             while (day <= NUMBER_OF_WORKING_DAYS && totalHrs <= MAX_WORKING_HRS)
             {
@@ -43,17 +45,14 @@ namespace EmployeeWageComputation
                         empHrs = 0;
                         break;
                 }
-                //UC2
                 empWage = EMP_RATE_PER_HR * empHrs;
-                Console.WriteLine("Employee Wage for day{0} and {1}hrs is:{2} ", day, empHrs, empWage);
-                //totalWage = totalWage + empWage;
                 day++;
                 totalHrs += empHrs;
                 totalWage += empWage;
+                Console.WriteLine("Employee wage is:" + empWage);
             }
-            //Console.WriteLine("Employee wage is:" +empWage);
-            Console.WriteLine("Total Wage for {0} days and {1} hrs is:{2} ", (day - 1), totalHrs, totalWage );
-            Console.ReadLine();
+            Console.WriteLine("Total Wage for {0} days and {1} hrs is:{2} ", (day - 1), totalHrs, totalWage);
+            return totalWage;
         }
     }
 }
