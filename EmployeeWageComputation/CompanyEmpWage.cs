@@ -23,5 +23,10 @@ namespace EmployeeWageComputation
         {
             this.totalWage = totalWage;
         }
+
+        public override string ToString()
+        {
+            return $"Company Name:{companyName} , Emp Rate:{empRatePerHr} , Working Days:{numOfWorkingDays} , Working Hrs:{maxWorkingHrs} , Total Wage:{totalWage}";
+        }
     }
 }

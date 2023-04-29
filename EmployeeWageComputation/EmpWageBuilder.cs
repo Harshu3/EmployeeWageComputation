@@ -27,6 +27,7 @@ namespace EmployeeWageComputation
                 {
                     int totalWage = CalculateEmpWage(companies[i]);
                     companies[i].SetTotalWage(totalWage);
+                    Console.WriteLine(companies[i]);
                 }
             }
         }
@@ -60,7 +61,7 @@ namespace EmployeeWageComputation
                 totalHrs += empHrs;
                 totalWage += empWage;
             }
-            Console.WriteLine("Total Wage for {0} {1} days and {2} hrs is:{3} ", companyEmpWage.companyName, (day - 1), totalHrs, totalWage);
+            //Console.WriteLine("Total Wage for {0} {1} days and {2} hrs is:{3} ", companyEmpWage.companyName, (day - 1), totalHrs, totalWage);
             return totalWage;
         }
         static void Main(string[] args)
