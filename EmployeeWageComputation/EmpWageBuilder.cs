@@ -4,31 +4,26 @@ namespace EmployeeWageComputation
 {
     class EmpWageBuilder
     {
-        public CompanyEmpWage[] companies;
-        public int numOfcompanies = 0;
+        public List<CompanyEmpWage> list;
 
         public EmpWageBuilder()
         {
-            companies = new CompanyEmpWage[5];
+            list = new List<CompanyEmpWage>();
         }
 
         public void AddCompanies(string companyName, int empRatePerHr, int numOfWorkingDays, int maxWorkingHrs)
         {
             CompanyEmpWage company = new CompanyEmpWage(companyName, empRatePerHr, numOfWorkingDays, maxWorkingHrs);
-            companies[numOfcompanies] = company;
-            numOfcompanies++;
+            list.Add(company);
         }
 
         public void FetchCompanyEmpWageFromArray()
         {
-            for (int i = 0; i < companies.Length; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                if (companies[i] != null)
-                {
-                    int totalWage = CalculateEmpWage(companies[i]);
-                    companies[i].SetTotalWage(totalWage);
-                    Console.WriteLine(companies[i]);
-                }
+                int totalWage = CalculateEmpWage(list[i]);
+                list[i].SetTotalWage(totalWage);
+                Console.WriteLine(list[i]);
             }
         }
         public int CalculateEmpWage(CompanyEmpWage companyEmpWage)
