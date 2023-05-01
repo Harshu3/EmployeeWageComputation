@@ -2,7 +2,7 @@
 
 namespace EmployeeWageComputation
 {
-    class EmpWageBuilder
+    class EmpWageBuilder: IEmpWageBuilder
     {
         public List<CompanyEmpWage> list;
 
