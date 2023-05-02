@@ -6,11 +6,13 @@ namespace EmployeeWageComputation
     {
         public List<CompanyEmpWage> list;
         public List<Dictionary<int, int>> DailyWage;
+        public Dictionary<string, int> TotalWage;
 
         public EmpWageBuilder()
         {
             list = new List<CompanyEmpWage>();
             DailyWage = new List<Dictionary<int, int>>();
+            TotalWage = new Dictionary<string, int>();
         }
 
         public void AddCompanies(string companyName, int empRatePerHr, int numOfWorkingDays, int maxWorkingHrs)
@@ -26,6 +28,19 @@ namespace EmployeeWageComputation
                 int totalWage = CalculateEmpWage(list[i]);
                 list[i].SetTotalWage(totalWage);
                 Console.WriteLine(list[i]);
+                TotalWage.Add(list[i].companyName, totalWage);
+            }
+        }
+
+        public void DisplayTotalWage(string companyName)
+        {
+            if (TotalWage.ContainsKey(companyName))
+            {
+                Console.WriteLine("Total Wage is:" + TotalWage[companyName]);
+            }
+            else
+            {
+                Console.WriteLine("This company not exist");
             }
         }
 
@@ -87,7 +102,10 @@ namespace EmployeeWageComputation
             empWageBuilder.AddCompanies("Accenture", 60, 36, 55);
             empWageBuilder.AddCompanies("Capgemini", 50, 30, 68);
             empWageBuilder.FetchCompanyEmpWageFromArray();
-            empWageBuilder.DisplayDailyWage();
+            //empWageBuilder.DisplayDailyWage();
+            Console.WriteLine("\nPlease enter company name to check total wage");
+            string name = Console.ReadLine();
+            empWageBuilder.DisplayTotalWage(name);
         }
     }
 }
