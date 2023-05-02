@@ -5,10 +5,12 @@ namespace EmployeeWageComputation
     class EmpWageBuilder: IEmpWageBuilder
     {
         public List<CompanyEmpWage> list;
+        public List<Dictionary<int, int>> DailyWage;
 
         public EmpWageBuilder()
         {
             list = new List<CompanyEmpWage>();
+            DailyWage = new List<Dictionary<int, int>>();
         }
 
         public void AddCompanies(string companyName, int empRatePerHr, int numOfWorkingDays, int maxWorkingHrs)
@@ -26,11 +28,25 @@ namespace EmployeeWageComputation
                 Console.WriteLine(list[i]);
             }
         }
+
+        public void DisplayDailyWage()
+        {
+            for (int i = 0; i < DailyWage.Count; i++)
+            {
+                Console.WriteLine("\nDaily Wage of " + list[i].companyName + ":");
+                foreach (KeyValuePair<int, int> vp in DailyWage[i])
+                {
+                    Console.Write("Day:" + vp.Key + " " + "Wage:" + vp.Value + ", ");
+                }
+                Console.WriteLine("\n");
+            }
+        }
         public int CalculateEmpWage(CompanyEmpWage companyEmpWage)
         {
             int empHrs = 0, empWage = 0, totalWage = 0, day = 1, totalHrs = 0;
             const int IS_FULL_TIME = 1;
             const int IS_PART_TIME = 2;
+            Dictionary<int, int> dic = new Dictionary<int, int>();
 
             Random random = new Random();
             while (day <= companyEmpWage.numOfWorkingDays && totalHrs <= companyEmpWage.maxWorkingHrs)
@@ -52,10 +68,12 @@ namespace EmployeeWageComputation
                         break;
                 }
                 empWage = companyEmpWage.empRatePerHr * empHrs;
+                dic.Add(day, empWage);
                 day++;
                 totalHrs += empHrs;
                 totalWage += empWage;
             }
+            DailyWage.Add(dic);
             //Console.WriteLine("Total Wage for {0} {1} days and {2} hrs is:{3} ", companyEmpWage.companyName, (day - 1), totalHrs, totalWage);
             return totalWage;
         }
@@ -69,6 +87,7 @@ namespace EmployeeWageComputation
             empWageBuilder.AddCompanies("Accenture", 60, 36, 55);
             empWageBuilder.AddCompanies("Capgemini", 50, 30, 68);
             empWageBuilder.FetchCompanyEmpWageFromArray();
+            empWageBuilder.DisplayDailyWage();
         }
     }
 }
